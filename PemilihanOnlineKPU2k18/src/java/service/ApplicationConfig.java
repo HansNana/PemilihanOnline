@@ -30,6 +30,9 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(service.AkunResource.class);
+        resources.add(service.DataCalonResource.class);
+        resources.add(service.PesertaAcaraResource.class);
+        resources.add(service.VotersResource.class);
     }
     
 }
