@@ -19,7 +19,7 @@ public class PesertaAcaraHelper {
     public PesertaAcaraHelper(){
         
     }
-    public List<PesertaAcara> getAllPasien(){
+    public List<PesertaAcara> getAllPesertaAcara(){
         List<PesertaAcara> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         String query = "from PesertaAcara p";
