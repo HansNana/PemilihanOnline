@@ -13,6 +13,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
@@ -38,6 +39,7 @@ public class AkunResource {
 
     /**
      * Retrieves representation of an instance of service.AkunResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -56,10 +58,25 @@ public class AkunResource {
 
     /**
      * PUT method for updating or creating an instance of AkunResource
+     *
      * @param content representation for the resource
      */
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void putJson(String content) {
-//    }
+    @POST
+    @Path("addAkun")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addAkun(String data) {
+        Gson gson = new Gson();
+        Akun akun = gson.fromJson(data, Akun.class);
+        AkunHelper helper = new AkunHelper();
+        helper.addNewAkun(
+                akun.getNik(),
+                akun.getNama(),
+                akun.getEmail(),
+                akun.getPassword()
+        );
+        return Response
+                .status(200)
+                .entity(akun)
+                .build();
+    }
 }

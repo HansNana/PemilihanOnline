@@ -6,6 +6,7 @@
 package service;
 
 import com.google.gson.Gson;
+import helper.AkunHelper;
 import helper.PesertaAcaraHelper;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -13,10 +14,12 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pojos.Akun;
 import pojos.PesertaAcara;
 
 /**
@@ -58,8 +61,22 @@ public class PesertaAcaraResource {
      * PUT method for updating or creating an instance of PesertaAcaraResource
      * @param content representation for the resource
      */
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void putJson(String content) {
-//    }
+    @POST
+    @Path("addPesertaAcara")
+    @Consumes(MediaType.APPLICATION_JSON)
+public Response addPesertaAcara(String data) {
+        Gson gson = new Gson();
+        
+        PesertaAcara peserta = gson.fromJson(data, PesertaAcara.class);
+        PesertaAcaraHelper helper = new PesertaAcaraHelper();
+        
+        helper.addNewPeserta(
+                peserta.getNik(),
+                peserta.getNama(),
+                peserta.getNamaAcara());
+        return Response
+                .status(200)
+                .entity(peserta)
+                .build();
+    }
 }

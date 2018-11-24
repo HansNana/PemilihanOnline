@@ -6,6 +6,7 @@
 package service;
 
 import com.google.gson.Gson;
+import helper.AkunHelper;
 import helper.DataCalonHelper;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -13,10 +14,12 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pojos.Akun;
 import pojos.DataCalon;
 
 /**
@@ -38,6 +41,7 @@ public class DataCalonResource {
 
     /**
      * Retrieves representation of an instance of service.DataCalonResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -56,10 +60,25 @@ public class DataCalonResource {
 
     /**
      * PUT method for updating or creating an instance of DataCalonResource
+     *
      * @param content representation for the resource
      */
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void putJson(String content) {
-//    }
+    @POST
+    @Path("addDataCalon")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addDataCalon(String data) {
+        Gson gson = new Gson();
+
+        DataCalon dataCalon = gson.fromJson(data, DataCalon.class);
+        DataCalonHelper helper = new DataCalonHelper();
+
+        helper.addNewDataCalon(dataCalon.getNik(),
+                dataCalon.getNama(),
+                dataCalon.getNoUrut(),
+                dataCalon.getFoto());
+        return Response
+                .status(200)
+                .entity(dataCalon)
+                .build();
+    }
 }

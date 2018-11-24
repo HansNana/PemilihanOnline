@@ -5,9 +5,12 @@
  */
 package helper;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojos.Akun;
 import pojos.PesertaAcara;
 import util.HibernateUtil;
 
@@ -27,5 +30,13 @@ public class PesertaAcaraHelper {
         result = q.list();
         session.close();
         return result;
+    }
+    public void addNewPeserta(int nik, String nama, String namaAcara){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();        
+        PesertaAcara peserta = new PesertaAcara(nik, nama, namaAcara);
+        session.saveOrUpdate(peserta);
+        transaction.commit();
+        session.close();
     }
 }
