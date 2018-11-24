@@ -5,6 +5,9 @@
  */
 package service;
 
+import com.google.gson.Gson;
+import helper.PesertaAcaraHelper;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -13,6 +16,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import pojos.PesertaAcara;
 
 /**
  * REST Web Service
@@ -37,17 +42,24 @@ public class PesertaAcaraResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    public Response getJsonPesertaAcara() {
         //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        PesertaAcaraHelper test = new PesertaAcaraHelper();
+        List<PesertaAcara> list = test.getAllPesertaAcara();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return Response
+                .status(200)
+                .entity(json)
+                .build();
     }
 
     /**
      * PUT method for updating or creating an instance of PesertaAcaraResource
      * @param content representation for the resource
      */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
+//    @PUT
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void putJson(String content) {
+//    }
 }

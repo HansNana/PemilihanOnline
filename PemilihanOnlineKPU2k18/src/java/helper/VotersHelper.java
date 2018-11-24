@@ -19,7 +19,7 @@ public class VotersHelper {
     public VotersHelper(){
         
     }
-    public List<Voters> getAllPasien(){
+    public List<Voters> getAllVoters(){
         List<Voters> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         String query = "from Voters v";

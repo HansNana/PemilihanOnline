@@ -17,7 +17,7 @@ import pojos.Voters;
 public class testVoters {
     public static void main(String[] args) {
         VotersHelper test = new VotersHelper();
-        List<Voters> list = test.getAllPasien();
+        List<Voters> list = test.getAllVoters();
         Gson gson = new Gson();
         String json = gson.toJson(list);
         System.out.println(json);
