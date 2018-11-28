@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Komisi Pemilihan Umum</title>
+        <title>Komisi Pemilihan Umum - Daftar Account</title>
         <meta name="description" content="Komisi Pemilihan Umum merupakan lembaga yang menyelenggarakan pemilihan umum di Indonesia." />
         <meta name="keywords" content="komisi pemilihan umum, kpu, pemilihan online, pemilihan" />
         <meta name="author" content="Ketut Muliana (165314065) & Bram Chandra Saputra (165314078)" />
@@ -58,6 +58,7 @@
                     </button>
                     <a class="navbar-brand" href="Login.html"><img src="img/logoKpu.png" data-active-url="img/logoKpu.png" alt=""></a>
                 </div>
+                <a  style="padding: 10px; color: black" class="navbar-brand" href="Login.html">Komisi Pemilihan Umum</a>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
@@ -93,7 +94,7 @@
                     </div>       
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <input type="submit" class="btn btn-blue-fill" value="Submit">
+                            <input type="submit" onclick="myFunctionAlert()" class="btn btn-blue-fill" value="Submit">
                             <input type="reset" class="btn btn-blue-fill" value="Reset">
                         </div>
                     </div>
@@ -110,16 +111,30 @@
                         "password": form.password.value
                     };
                     var html = JSON.stringify(json, 0, 100);
-                    var Url = "#";
+                    var Url = "http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/addAkun";
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', Url, false);
                     xhr.setRequestHeader("Content-type", "application/json");
                     xhr.send(html);
                     document.getElementById("output").innerHTML = html;
                     return false;
+                    //window.alert("Hello " + nama + "! Pendaftaran akun berhasil :D");
                 }
                 ;
             </script>	
+            <p id="demo"></p>
+            <script>
+                function myFunctionAlert() {
+                    var txt;
+                    if (confirm("Hello " + nama + "! Pendaftaran akun berhasil :D")) {
+                        txt = "You pressed OK!";
+                        
+                    } else {
+                        txt = "You pressed Cancel!";
+                    }
+                    document.getElementById("demo").innerHTML = txt;
+                }
+            </script>
         </section>
         <footer id="contacUs">
             <div class="container">    
