@@ -7,6 +7,7 @@ package service;
 
 import com.google.gson.Gson;
 import helper.AkunHelper;
+import helper.DataCalonHelper;
 import helper.PesertaAcaraHelper;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -17,6 +18,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pojos.Akun;
@@ -41,6 +43,7 @@ public class PesertaAcaraResource {
 
     /**
      * Retrieves representation of an instance of service.PesertaAcaraResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -59,24 +62,36 @@ public class PesertaAcaraResource {
 
     /**
      * PUT method for updating or creating an instance of PesertaAcaraResource
+     *
      * @param content representation for the resource
      */
     @POST
     @Path("addPesertaAcara")
     @Consumes(MediaType.APPLICATION_JSON)
-public Response addPesertaAcara(String data) {
+    public Response addPesertaAcara(String data) {
         Gson gson = new Gson();
-        
         PesertaAcara peserta = gson.fromJson(data, PesertaAcara.class);
         PesertaAcaraHelper helper = new PesertaAcaraHelper();
-        
         helper.addNewPeserta(
                 peserta.getNik(),
                 peserta.getNama(),
-                peserta.getNamaAcara());
+                peserta.getJenisAcara());
         return Response
                 .status(200)
                 .entity(peserta)
+                .build();
+    }
+
+    @GET
+    @Path("deletePesertaAcara")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deletePesertaAcara(
+            @QueryParam("nik") int nik) {
+        PesertaAcaraHelper helper = new PesertaAcaraHelper();
+        int data = helper.deletePesertaAcara(nik);
+        return Response
+                .status(200)
+                .entity(data)
                 .build();
     }
 }

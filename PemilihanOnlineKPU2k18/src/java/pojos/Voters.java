@@ -1,5 +1,5 @@
 package pojos;
-// Generated Nov 6, 2018 12:49:23 PM by Hibernate Tools 4.3.1
+// Generated Dec 3, 2018 7:08:52 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,19 +9,29 @@ package pojos;
 public class Voters  implements java.io.Serializable {
 
 
+     private Integer idVoters;
      private int nik;
      private String nama;
      private int noUrut;
+     private String jenisAcara;
 
     public Voters() {
     }
 
-    public Voters(int nik, String nama, int noUrut) {
+    public Voters(int nik, String nama, int noUrut, String jenisAcara) {
        this.nik = nik;
        this.nama = nama;
        this.noUrut = noUrut;
+       this.jenisAcara = jenisAcara;
     }
    
+    public Integer getIdVoters() {
+        return this.idVoters;
+    }
+    
+    public void setIdVoters(Integer idVoters) {
+        this.idVoters = idVoters;
+    }
     public int getNik() {
         return this.nik;
     }
@@ -42,6 +52,13 @@ public class Voters  implements java.io.Serializable {
     
     public void setNoUrut(int noUrut) {
         this.noUrut = noUrut;
+    }
+    public String getJenisAcara() {
+        return this.jenisAcara;
+    }
+    
+    public void setJenisAcara(String jenisAcara) {
+        this.jenisAcara = jenisAcara;
     }
 
 

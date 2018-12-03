@@ -17,6 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pojos.Akun;
@@ -68,17 +69,28 @@ public class DataCalonResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addDataCalon(String data) {
         Gson gson = new Gson();
-
         DataCalon dataCalon = gson.fromJson(data, DataCalon.class);
         DataCalonHelper helper = new DataCalonHelper();
-
-        helper.addNewDataCalon(dataCalon.getNik(),
-                dataCalon.getNama(),
+        helper.addNewDataCalon(dataCalon.getNikCalon(),
+                dataCalon.getNamaCalon(),
                 dataCalon.getNoUrut(),
-                dataCalon.getFoto());
+                dataCalon.getFoto(),
+                dataCalon.getJenisAcara());
         return Response
                 .status(200)
                 .entity(dataCalon)
                 .build();
+    }
+    @GET    
+    @Path("deleteDataCalon")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteDataCalon(
+            @QueryParam("nik")int nik) {
+        DataCalonHelper helper = new DataCalonHelper();
+        int data = helper.deleteDataCalon(nik);        
+        return Response
+                .status(200)
+                .entity(data)
+                .build();        
     }
 }

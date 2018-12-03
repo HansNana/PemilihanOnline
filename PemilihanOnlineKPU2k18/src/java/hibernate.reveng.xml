@@ -41,8 +41,9 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db165314080"/>
+  <table-filter match-name="pesertaAcara"/>
+  <table-filter match-name="acara"/>
   <table-filter match-name="voters"/>
   <table-filter match-name="akun"/>
-  <table-filter match-name="pesertaAcara"/>
   <table-filter match-name="dataCalon"/>
 </hibernate-reverse-engineering>

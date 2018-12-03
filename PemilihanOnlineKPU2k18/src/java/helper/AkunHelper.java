@@ -5,6 +5,7 @@
  */
 package helper;
 
+import java.util.Collections;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -36,5 +37,22 @@ public class AkunHelper {
         session.saveOrUpdate(akun);
         transaction.commit();
         session.close();
+    }
+     public Akun getUser(String email, String password) {
+        List<Akun> list = this.getAllAkun();
+        Collections.sort(list);
+        Akun akun = new Akun(email, password);
+        int result = Collections.binarySearch(list, akun);         
+        if (result <= -1) {
+            //cek user
+            return null;
+        } else {
+            Akun index = list.get(result);
+            if (akun.getPassword().equals(index.getPassword())) {
+                return akun;
+            } else {
+                return null;
+            }
+        }
     }
 }

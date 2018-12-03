@@ -1,5 +1,5 @@
 package pojos;
-// Generated Nov 6, 2018 12:49:23 PM by Hibernate Tools 4.3.1
+// Generated Dec 3, 2018 7:08:52 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,19 +9,27 @@ package pojos;
 public class PesertaAcara  implements java.io.Serializable {
 
 
+     private Integer idPesertaAcara;
      private int nik;
      private String nama;
-     private String namaAcara;
+     private String jenisAcara;
 
     public PesertaAcara() {
     }
 
-    public PesertaAcara(int nik, String nama, String namaAcara) {
+    public PesertaAcara(int nik, String nama, String jenisAcara) {
        this.nik = nik;
        this.nama = nama;
-       this.namaAcara = namaAcara;
+       this.jenisAcara = jenisAcara;
     }
    
+    public Integer getIdPesertaAcara() {
+        return this.idPesertaAcara;
+    }
+    
+    public void setIdPesertaAcara(Integer idPesertaAcara) {
+        this.idPesertaAcara = idPesertaAcara;
+    }
     public int getNik() {
         return this.nik;
     }
@@ -36,12 +44,12 @@ public class PesertaAcara  implements java.io.Serializable {
     public void setNama(String nama) {
         this.nama = nama;
     }
-    public String getNamaAcara() {
-        return this.namaAcara;
+    public String getJenisAcara() {
+        return this.jenisAcara;
     }
     
-    public void setNamaAcara(String namaAcara) {
-        this.namaAcara = namaAcara;
+    public void setJenisAcara(String jenisAcara) {
+        this.jenisAcara = jenisAcara;
     }
 
 

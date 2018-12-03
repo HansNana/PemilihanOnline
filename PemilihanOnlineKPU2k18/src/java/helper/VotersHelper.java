@@ -30,10 +30,19 @@ public class VotersHelper {
         session.close();
         return result;
     }
-    public void addNewVoters(int nik, String nama, int noUrut){
+    public int deleteVoters(int delete){
+        int result;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String query = "delete Voters where nik = '"+delete+"'";
+        Query q = session.createQuery(query);
+        result = q.executeUpdate();
+        session.close();
+        return result;
+    }
+    public void addNewVoters(int nik, String nama, int noUrut, String jenisAcara){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();        
-        Voters voters = new Voters(nik, nama, noUrut);
+        Voters voters = new Voters(nik, nama, noUrut, jenisAcara);
         session.saveOrUpdate(voters);
         transaction.commit();
         session.close();

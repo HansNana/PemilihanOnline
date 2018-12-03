@@ -1,5 +1,5 @@
 package pojos;
-// Generated Nov 6, 2018 12:49:23 PM by Hibernate Tools 4.3.1
+// Generated Dec 3, 2018 7:08:52 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,34 +9,44 @@ package pojos;
 public class DataCalon  implements java.io.Serializable {
 
 
-     private int nik;
-     private String nama;
+     private Integer idDataCalon;
+     private int nikCalon;
+     private String namaCalon;
      private int noUrut;
      private byte[] foto;
+     private String jenisAcara;
 
     public DataCalon() {
     }
 
-    public DataCalon(int nik, String nama, int noUrut, byte[] foto) {
-       this.nik = nik;
-       this.nama = nama;
+    public DataCalon(int nikCalon, String namaCalon, int noUrut, byte[] foto, String jenisAcara) {
+       this.nikCalon = nikCalon;
+       this.namaCalon = namaCalon;
        this.noUrut = noUrut;
        this.foto = foto;
+       this.jenisAcara = jenisAcara;
     }
    
-    public int getNik() {
-        return this.nik;
+    public Integer getIdDataCalon() {
+        return this.idDataCalon;
     }
     
-    public void setNik(int nik) {
-        this.nik = nik;
+    public void setIdDataCalon(Integer idDataCalon) {
+        this.idDataCalon = idDataCalon;
     }
-    public String getNama() {
-        return this.nama;
+    public int getNikCalon() {
+        return this.nikCalon;
     }
     
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNikCalon(int nikCalon) {
+        this.nikCalon = nikCalon;
+    }
+    public String getNamaCalon() {
+        return this.namaCalon;
+    }
+    
+    public void setNamaCalon(String namaCalon) {
+        this.namaCalon = namaCalon;
     }
     public int getNoUrut() {
         return this.noUrut;
@@ -51,6 +61,13 @@ public class DataCalon  implements java.io.Serializable {
     
     public void setFoto(byte[] foto) {
         this.foto = foto;
+    }
+    public String getJenisAcara() {
+        return this.jenisAcara;
+    }
+    
+    public void setJenisAcara(String jenisAcara) {
+        this.jenisAcara = jenisAcara;
     }
 
 

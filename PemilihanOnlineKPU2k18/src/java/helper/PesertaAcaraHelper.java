@@ -31,6 +31,15 @@ public class PesertaAcaraHelper {
         session.close();
         return result;
     }
+    public int deletePesertaAcara(int delete){
+        int result;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String query = "delete PesertaAcara where nik = '"+delete+"'";
+        Query q = session.createQuery(query);
+        result = q.executeUpdate();
+        session.close();
+        return result;
+    }
     public void addNewPeserta(int nik, String nama, String namaAcara){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();        

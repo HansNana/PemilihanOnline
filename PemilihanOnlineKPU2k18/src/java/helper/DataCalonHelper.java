@@ -30,10 +30,20 @@ public class DataCalonHelper {
         session.close();
         return result;
     }
-    public void addNewDataCalon(int nik, String nama, int noUrut, byte[] foto){
+    public int deleteDataCalon(int delete){
+        int result;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String query = "delete DataCalon where nikCalon = '"+delete+"'";
+        Query q = session.createQuery(query);
+        result = q.executeUpdate();
+        session.close();
+        return result;
+    }
+    
+    public void addNewDataCalon(int nik, String nama, int noUrut, byte[] foto, String jenisAcara){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();                
-        DataCalon dataCalon = new DataCalon(nik, nama, noUrut, foto);
+        DataCalon dataCalon = new DataCalon(nik, nama, noUrut, foto, jenisAcara);
         session.saveOrUpdate(dataCalon);
         transaction.commit();
         session.close();

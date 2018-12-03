@@ -16,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pojos.Akun;
@@ -37,11 +38,6 @@ public class AkunResource {
     public AkunResource() {
     }
 
-    /**
-     * Retrieves representation of an instance of service.AkunResource
-     *
-     * @return an instance of java.lang.String
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJsonAkun() {
@@ -53,6 +49,26 @@ public class AkunResource {
         return Response
                 .status(200)
                 .entity(json)
+                .build();
+    }
+
+    /**
+     * Retrieves representation of an instance of service.AkunResource
+     *
+     * @return an instance of java.lang.String
+     */
+    @GET
+    @Path("login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLogin(
+            @QueryParam("email") String email,
+            @QueryParam("password") String password) {
+        AkunHelper helper = new AkunHelper();
+        Akun akun = helper.getUser(email, password);
+        Gson gson = new Gson();
+        return Response
+                .status(200)
+                .entity(gson.toJson(akun))
                 .build();
     }
 
