@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Komisi Pemilihan Umum - Daftar Account</title>
+        <title>Daftar Account - Komisi Pemilihan Umum</title>
         <meta name="description" content="Komisi Pemilihan Umum merupakan lembaga yang menyelenggarakan pemilihan umum di Indonesia." />
         <meta name="keywords" content="komisi pemilihan umum, kpu, pemilihan online, pemilihan" />
         <meta name="author" content="Ketut Muliana (165314065) & Bram Chandra Saputra (165314078)" />
@@ -94,14 +94,14 @@
                     </div>       
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-6">
-                            <input type="submit" onclick="myFunctionAlert()" class="btn btn-blue-fill" value="Submit">
+                            <input type="submit" onclick="myFunctionAlert()"class="btn btn-blue-fill" value="Submit">
                             <input type="reset" class="btn btn-blue-fill" value="Reset">
                         </div>
                     </div>
                 </form>
                 <br>
             </div>	
-            <p id="output"></p>
+            <!--<p id="output"></p>-->
             <script>
                 function make_json(form) {
                     var json = {
@@ -116,25 +116,27 @@
                     xhr.open('POST', Url, false);
                     xhr.setRequestHeader("Content-type", "application/json");
                     xhr.send(html);
-                    document.getElementById("output").innerHTML = html;
+                    alert("Hello " + form.nama.value + ", Pendaftaran akun berhasil :D");
+                    window.open("Login.html", "_self");
                     return false;
-                    //window.alert("Hello " + nama + "! Pendaftaran akun berhasil :D");
                 }
                 ;
             </script>	
-            <p id="demo"></p>
-            <script>
-                function myFunctionAlert() {
-                    var txt;
-                    if (confirm("Hello " + nama + "! Pendaftaran akun berhasil :D")) {
-                        txt = "You pressed OK!";
-                        
-                    } else {
-                        txt = "You pressed Cancel!";
-                    }
-                    document.getElementById("demo").innerHTML = txt;
-                }
-            </script>
+
+            <!--            <p id="demo"></p>
+                        <script>
+                            function myFunctionAlert() {
+                                var txt;
+                                if (confirm("Hello " + form.nama.value + "! Pendaftaran akun berhasil :D")) {
+                                    txt = "";
+            //                        window.location.assign("http://202.94.83.190/~165314065/Login.html");
+                                    window.open("Login.html", "_self");
+                                } else {
+                                    txt = "";
+                                }
+                                document.getElementById("demo").innerHTML = txt;
+                            }
+                        </script>-->
         </section>
         <footer id="contacUs">
             <div class="container">    
@@ -159,7 +161,7 @@
             </div>
 
         </footer>
-        <!-- Holder for mobile navigation -->
+        <!-- Holder for mobile navigation 
         <div class="mobile-nav">
             <ul>
             </ul>
