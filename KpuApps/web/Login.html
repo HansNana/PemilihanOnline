@@ -14,7 +14,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
         <link rel="manifest" href="img/favicons/site.webmanifest">
-        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <!--        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">-->
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <link rel="shortcut icon" href="img/favicons/favicon.ico">
@@ -95,42 +95,49 @@
                             <img class="profile-img center-block" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                                  alt="">
                             <br>
-                            <form class="form-signin" onsubmit="loadDoc()">
-                                <input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
-                                <br>
-                                <input type="password" id="password" class="form-control" placeholder="Password" required>
-                                <br>
-                                <button class="btn btn-blue-fill btn-block" type="submit" onclick="loadDoc()" >
-                                    Login</button>
-                                <span class="clearfix"></span>
-                                <a href="DaftarAccount.html" class="text-center new-account center-block">Daftar Account</a>
-                            </form>
+                            <input type="text" id="mail" class="form-control" placeholder="Email" required autofocus>
+                            <br>
+                            <input type="password" id="pass" class="form-control" placeholder="Password" required>
+                            <br>
+                            <button class="btn btn-blue-fill btn-block" type="submit" onclick="loadDoc()" >Login</button>
+                            <span class="clearfix"></span>
+                            <a href="DaftarAccount.html" class="text-center new-account center-block">Daftar Account</a>
+                            <p id="demo"></p>
                         </div>                       
                     </div>
                 </div>
             </div>   
         </section> 
         <script>
+
+
             function loadDoc() {
-                var email = email.value;
-                var password = password.value;                
-                var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/user?email=' + email + '&password=' + password;
+                var email = mail.value;
+                var password = pass.value;
+
+
+                var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/login?email=' + email + '&password=' + password;
+
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
-                    if (this.readyState === 4 && this.status === 200) {
-                        var akun = JSON.parse(this.tresponseText);
+                    if (this.readyState == 4 && this.status == 200) {
+                        var akun = JSON.parse(this.responseText);
                         if (akun !== null) {
-                            window.open("http://202.94.83.190/~165314065/HalamanUtama.html");
+                            alert("Selamat Datang "+email);
+                            window.open("HalamanUtama.html","_self");
+                            
                         } else {
                             alert("Login Gagal!");
                         }
-                        document.getElementById("demo").innerHTML =
-                                this.responseText;
+
+
                     }
                 };
                 xhttp.open("GET", url, true);
                 xhttp.send();
             }
+
+
         </script>
         <footer id="contacUs">
             <div class="container">    
