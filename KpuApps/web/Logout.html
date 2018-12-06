@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" id="home">
 
-    <head> 
+    <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
         <link rel="manifest" href="img/favicons/site.webmanifest">
-        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <!--        <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">-->
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <link rel="shortcut icon" href="img/favicons/favicon.ico">
@@ -87,53 +87,61 @@
                 </div>
             </div>
         </header>
-        <section id="daftarPeserta" class="section section-padded">
+        <section id="login" class="section section-padded bg-info">
             <div class="container">
-                <div class="row text-center title">
-                    <h2>Daftar Peserta</h2>
-                    <h4 class="light muted">Ayo daftarkan dirimu untuk pemilihan.</h4>
-                </div>
-                <div class="row services">
-                    <div class="col-md-4">
-                        <div class="service">
-                            <div class="icon-holder">
-                                <img src="img/icons/akun.png" alt="" class="icon">
-                            </div>
-                            <h4 class="heading">Daftar Pasien</h4>
-                            <p class="description">Daftar Pasien merupakan halaman untuk mendaftarkan Pasien baru.
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-md-offset-4">
+                        <h3 class="text-center login-title">Login</h3>
+                        <form class="form-signin" onsubmit="loadDoc()">
+                            <div class="account-wall">
+                                <img class="profile-img center-block" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                                     alt="">
                                 <br>
-                                <a href="formDaftar.html" class="btn btn-blue-fill">Daftar Pasien</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="service">
-                            <div class="icon-holder">
-                                <img src="img/icons/klinik.png" alt="" class="icon">
-                            </div>
-                            <h4 class="heading">Daftar Klinik</h4>
-                            <p class="description">Daftar Klinik merupakan halaman untuk mendaftarkan klinik yang ada di Yogyakarta.
+                                <input type="text" id="mail" class="form-control" placeholder="Email" required autofocus>
                                 <br>
-                                <a href="formKlinik.html" class="btn btn-blue-fill">Daftar Klinik</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="service">
-                            <div class="icon-holder">
-                                <img src="img/icons/absen.png" alt="" class="icon">
-                            </div>
-                            <h4 class="heading">Form Antrian Klinik</h4>
-                            <p class="description">Antrian Klinik merupakan sebuah Form untuk pengambilan nomor antrian Pasien.
+                                <input type="password" id="pass" class="form-control" placeholder="Password" required>
                                 <br>
-                                <a href="formAntrianKlinik.html" class="btn btn-blue-fill">Antrian Klinik</a>
-                            </p>
-                        </div>
+                                <button class="btn btn-blue-fill btn-block" type="submit" onclick="loadDoc()" >Login</button>
+                                <span class="clearfix"></span>
+                                <a href="DaftarAccount.html" class="text-center new-account center-block">Daftar Account</a>
+                                <p id="demo"></p>
+                            </div>   
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="cut cut-bottom"></div>
-        </section>
+            </div>   
+        </section> 
+        <script>
+
+
+            function loadDoc() {
+                var email = mail.value;
+                var password = pass.value;
+
+
+                var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/login?email=' + email + '&password=' + password;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var akun = JSON.parse(this.responseText);
+                        if (akun !== null) {
+                            alert("Selamat Datang " + email);
+                            window.open("HalamanUtama.html", "_self");
+
+                        } else {
+                            alert("Login Gagal!");
+                        }
+
+
+                    }
+                };
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            }
+
+
+        </script>
         <footer id="contactUs">
             <div class="container">    
                 <div class="row">
@@ -163,30 +171,6 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
-        <script>
-            var xmlhttp = new XMLHttpRequest();
-            var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/acara';
 
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    myFunction(this.responseText);
-                }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-            function myFunction(response) {
-                var arr = JSON.parse(response);
-                var i;
-                
-
-                for (i = 0; i < arr.length; i++) {
-                    out += "<tr><td>" +
-                            arr[i].jenisAcara +
-                            "</td><td>";
-                }
-                out += "</table>";
-                document.getElementById("output").innerHTML = out;
-            }
-        </script>
     </body>
 </html>
