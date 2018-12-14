@@ -93,9 +93,10 @@
                     <h2>Daftar Peserta</h2>
                     <h4 class="light muted">Ayo daftarkan dirimu untuk pemilihan.</h4>
                 </div>
-                <div class="row services">
-                    <div class="col-md-4">
-                        <div class="service">
+                <div id="output"  class="row services">     
+                    <p id="output" ></p>
+                    
+<!--                        <div class="service">
                             <div class="icon-holder">
                                 <img src="img/icons/akun.png" alt="" class="icon">
                             </div>
@@ -129,7 +130,7 @@
                                 <a href="formAntrianKlinik.html" class="btn btn-blue-fill">Antrian Klinik</a>
                             </p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="cut cut-bottom"></div>
@@ -165,7 +166,7 @@
         </div>
         <script>
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/acara';
+            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -177,14 +178,18 @@
             function myFunction(response) {
                 var arr = JSON.parse(response);
                 var i;
-                
-
+                var out;
                 for (i = 0; i < arr.length; i++) {
-                    out += "<tr><td>" +
-                            arr[i].jenisAcara +
-                            "</td><td>";
+                out += "<div class=\"col-md-4\">" +
+                        "<div class=\"service\">" +                        
+                        "<h4 class=\"heading\">"+arr[i].jenisAcara+"</h4>" +                        
+                        "<br>" +
+                        "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
+                        "</p>" +
+                        "</div>" +
+                        "</div>" 
                 }
-                out += "</table>";
+                
                 document.getElementById("output").innerHTML = out;
             }
         </script>
