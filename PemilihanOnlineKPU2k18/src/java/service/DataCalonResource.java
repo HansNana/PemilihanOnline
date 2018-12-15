@@ -81,16 +81,31 @@ public class DataCalonResource {
                 .entity(dataCalon)
                 .build();
     }
-    @GET    
+
+    @GET
     @Path("deleteDataCalon")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteDataCalon(
-            @QueryParam("nik")int nik) {
+            @QueryParam("nik") int nik) {
         DataCalonHelper helper = new DataCalonHelper();
-        int data = helper.deleteDataCalon(nik);        
+        int data = helper.deleteDataCalon(nik);
         return Response
                 .status(200)
                 .entity(data)
-                .build();        
+                .build();
+    }
+
+    @GET
+    @Path("getAcara")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAcara(
+            @QueryParam("jenisAcara") String jenisAcara) {
+        DataCalonHelper helper = new DataCalonHelper();
+        DataCalon dataCalon = helper.getAcara(jenisAcara);
+        Gson gson = new Gson();
+        return Response
+                .status(200)
+                .entity(gson.toJson(dataCalon))
+                .build();
     }
 }

@@ -5,10 +5,12 @@
  */
 package helper;
 
+import java.util.Collections;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import pojos.Akun;
 import pojos.DataCalon;
 import pojos.PesertaAcara;
 import util.HibernateUtil;
@@ -40,6 +42,7 @@ public class DataCalonHelper {
         return result;
     }
     
+    
     public void addNewDataCalon(int nik, String nama, int noUrut, byte[] foto, String jenisAcara){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();                
@@ -47,5 +50,23 @@ public class DataCalonHelper {
         session.saveOrUpdate(dataCalon);
         transaction.commit();
         session.close();
+    }
+    
+    public DataCalon getAcara(String jenis) {
+        List<DataCalon> list = this.getAllDataCalon();
+        Collections.sort(list);
+        DataCalon dataCalon = new DataCalon(0, null, 0, null, jenis);
+        int result = Collections.binarySearch(list, dataCalon);         
+        if (result <= -1) {
+            //cek user
+            return null;
+        } else {
+            DataCalon index = list.get(result);
+            if (dataCalon.getJenisAcara().equals(index.getJenisAcara())) {
+                return dataCalon;
+            } else {
+                return null;
+            }
+        }
     }
 }

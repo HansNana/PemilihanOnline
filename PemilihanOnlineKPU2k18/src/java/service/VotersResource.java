@@ -94,4 +94,17 @@ public class VotersResource {
                 .entity(data)
                 .build();
     }
+    @GET
+    @Path("getAcara")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAcara(
+            @QueryParam("jenisAcara") String jenisAcara){
+        VotersHelper helper = new VotersHelper();
+        Voters voters = helper.getAcara(jenisAcara);
+        Gson gson = new Gson();
+        return Response
+                .status(200)
+                .entity(gson.toJson(voters))
+                .build();
+    }
 }

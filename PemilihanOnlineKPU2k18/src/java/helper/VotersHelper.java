@@ -5,6 +5,7 @@
  */
 package helper;
 
+import java.util.Collections;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -46,5 +47,22 @@ public class VotersHelper {
         session.saveOrUpdate(voters);
         transaction.commit();
         session.close();
+    }
+    public Voters getAcara(String jenis) {
+        List<Voters> list = this.getAllVoters();
+        Collections.sort(list);
+        Voters voters = new Voters(jenis);
+        int result = Collections.binarySearch(list, voters);         
+        if (result <= -1) {
+            //cek user
+            return null;
+        } else {
+            Voters index = list.get(result);
+            if (voters.getJenisAcara().equals(index.getJenisAcara())) {
+                return voters;
+            } else {
+                return null;
+            }
+        }
     }
 }

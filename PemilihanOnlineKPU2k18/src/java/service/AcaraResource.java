@@ -8,6 +8,7 @@ package service;
 import com.google.gson.Gson;
 import helper.AcaraHelper;
 import helper.AkunHelper;
+import helper.DataCalonHelper;
 import helper.VotersHelper;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -18,6 +19,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pojos.Acara;
@@ -75,5 +77,17 @@ public class AcaraResource {
                 .status(200)
                 .entity(acara)
                 .build();
+    }
+    @GET    
+    @Path("deleteAcara")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteAcara(
+            @QueryParam("jenisAcara")String jenisAcara) {
+        AcaraHelper helper = new AcaraHelper();
+        int data = helper.deleteJenisAcara(jenisAcara);        
+        return Response
+                .status(200)
+                .entity(data)
+                .build();        
     }
 }

@@ -30,7 +30,15 @@ public class AcaraHelper {
         session.close();
         return result;
     }
-    
+     public int deleteJenisAcara(String delete){
+        int result;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String query = "delete Acara where jenisAcara= '"+delete+"'";
+        Query q = session.createQuery(query);
+        result = q.executeUpdate();
+        session.close();
+        return result;
+    }
      public void addNewAcara(String jenisAcara){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -39,4 +47,5 @@ public class AcaraHelper {
         transaction.commit();
         session.close();
     }
+     
 }
