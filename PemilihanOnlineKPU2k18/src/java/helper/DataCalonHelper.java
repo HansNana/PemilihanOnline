@@ -20,10 +20,12 @@ import util.HibernateUtil;
  * @author danielbram
  */
 public class DataCalonHelper {
-    public DataCalonHelper(){
-        
+
+    public DataCalonHelper() {
+
     }
-    public List<DataCalon> getAllDataCalon(){
+
+    public List<DataCalon> getAllDataCalon() {
         List<DataCalon> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         String query = "from DataCalon d";
@@ -32,41 +34,39 @@ public class DataCalonHelper {
         session.close();
         return result;
     }
-    public int deleteDataCalon(int delete){
+
+    public int deleteDataCalon(int delete) {
         int result;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String query = "delete DataCalon where nikCalon = '"+delete+"'";
+        String query = "delete DataCalon where nikCalon = '" + delete + "'";
         Query q = session.createQuery(query);
         result = q.executeUpdate();
         session.close();
         return result;
     }
-    
-    
-    public void addNewDataCalon(int nik, String nama, int noUrut, byte[] foto, String jenisAcara){
+
+    public void addNewDataCalon(int nik, String nama, int noUrut, byte[] foto, String jenisAcara) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();                
+        Transaction transaction = session.beginTransaction();
         DataCalon dataCalon = new DataCalon(nik, nama, noUrut, foto, jenisAcara);
         session.saveOrUpdate(dataCalon);
         transaction.commit();
         session.close();
     }
-    
-    public DataCalon getAcara(String jenis) {
+
+    public List<DataCalon> getAcara(String jenis) {
         List<DataCalon> list = this.getAllDataCalon();
-        Collections.sort(list);
-        DataCalon dataCalon = new DataCalon(0, null, 0, null, jenis);
-        int result = Collections.binarySearch(list, dataCalon);         
-        if (result <= -1) {
-            //cek user
-            return null;
-        } else {
-            DataCalon index = list.get(result);
-            if (dataCalon.getJenisAcara().equals(index.getJenisAcara())) {
-                return dataCalon;
-            } else {
-                return null;
+        List<DataCalon> ketemu = this.getAllDataCalon();
+        ketemu.clear();
+
+        DataCalon dataCalon = new DataCalon(jenis);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getJenisAcara().equals(dataCalon.getJenisAcara())) {
+                ketemu.add(list.get(i));
             }
+
         }
+
+        return ketemu;
     }
 }

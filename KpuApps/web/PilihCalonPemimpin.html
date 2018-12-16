@@ -128,8 +128,9 @@
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
         <script>
+            var jenisAcara = getCookie("jenisAcara")
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon';
+            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/getAcara?jenisAcara='+jenisAcara;
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -143,19 +144,33 @@
                 var i;
                 var out;
                 for (i = 0; i < arr.length; i++) {
-                out += "<div class=\"col-md-4\">" +
-                        "<div class=\"service\">" +                        
-                        "<h4 >"+arr[i].namaCalon+"</h4>" +                        
-                        "<br>" +
-                        "<br>" +
-                        "<br>" +
-                        "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
-                        "</p>" +
-                        "</div>" +
-                        "</div>" ;
+                    out += "<div class=\"col-md-4\">" +
+                            "<div class=\"service\">" +
+                            "<h4 >" + arr[i].namaCalon + "</h4>" +
+                            "<br>" +
+                            "<br>" +
+                            "<br>" +
+                            "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
+                            "</p>" +
+                            "</div>" +
+                            "</div>";
                 }
-                
+
                 document.getElementById("output").innerHTML = out;
+            }
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
             }
         </script>
     </body>

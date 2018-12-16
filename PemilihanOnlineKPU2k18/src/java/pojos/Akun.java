@@ -17,6 +17,10 @@ public class Akun   implements java.io.Serializable, Comparable<Akun> {
     public Akun() {
     }
 
+    public Akun(String email) {       
+       this.email = email;
+       
+    }
     public Akun(String email, String password) {       
        this.email = email;
        this.password = password;

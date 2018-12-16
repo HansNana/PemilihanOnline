@@ -19,10 +19,12 @@ import util.HibernateUtil;
  * @author danielbram
  */
 public class VotersHelper {
-    public VotersHelper(){
-        
+
+    public VotersHelper() {
+
     }
-    public List<Voters> getAllVoters(){
+
+    public List<Voters> getAllVoters() {
         List<Voters> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         String query = "from Voters v";
@@ -31,38 +33,55 @@ public class VotersHelper {
         session.close();
         return result;
     }
-    public int deleteVoters(int delete){
+
+    public int deleteVoters(int delete) {
         int result;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String query = "delete Voters where nik = '"+delete+"'";
+        String query = "delete Voters where nik = '" + delete + "'";
         Query q = session.createQuery(query);
         result = q.executeUpdate();
         session.close();
         return result;
     }
-    public void addNewVoters(int nik, String nama, int noUrut, String jenisAcara){
+
+    public void addNewVoters(int nik, String nama, int noUrut, String jenisAcara) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();        
+        Transaction transaction = session.beginTransaction();
         Voters voters = new Voters(nik, nama, noUrut, jenisAcara);
         session.saveOrUpdate(voters);
         transaction.commit();
         session.close();
     }
-    public Voters getAcara(String jenis) {
+
+    public List<Voters> getAcara(String jenis) {
         List<Voters> list = this.getAllVoters();
-        Collections.sort(list);
+        List<Voters> ketemu = this.getAllVoters();
+        ketemu.clear();
+
         Voters voters = new Voters(jenis);
-        int result = Collections.binarySearch(list, voters);         
-        if (result <= -1) {
-            //cek user
-            return null;
-        } else {
-            Voters index = list.get(result);
-            if (voters.getJenisAcara().equals(index.getJenisAcara())) {
-                return voters;
-            } else {
-                return null;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getJenisAcara().equals(voters.getJenisAcara())) {
+                ketemu.add(list.get(i));
             }
+
         }
+
+        return ketemu;
     }
+//    public List<Voters> getAcara(String jenis) {
+//        List<Voters> list = getAllVoters();
+//
+//        Voters voters = new Voters(jenis);
+//        for (int j = 0; j < list.size()+1; j++) {
+//            for (int i = 0; i < list.size(); i++) {
+//                if (!list.get(i).getJenisAcara().equals(voters.getJenisAcara())) {
+//                    list.remove(list.get(i));
+//                }
+//
+//            }
+//
+//        }
+//
+//        return list;
+//    }
 }

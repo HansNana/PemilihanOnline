@@ -8,9 +8,11 @@ package test;
 import com.google.gson.Gson;
 import helper.AkunHelper;
 import helper.DataCalonHelper;
+import helper.VotersHelper;
 import java.util.List;
 import pojos.Akun;
 import pojos.DataCalon;
+import pojos.Voters;
 
 /**
  *
@@ -20,8 +22,8 @@ public class test {
 
     public static void main(String[] args) {
 
-        DataCalonHelper test = new DataCalonHelper();
-        DataCalon data = test.getAcara("PemilihanRW");
+        VotersHelper test = new VotersHelper();
+        List<Voters> data = test.getAcara("PemilihanGubernur");
         if (data != null) {
             Gson gson = new Gson();
             String json = gson.toJson(data);

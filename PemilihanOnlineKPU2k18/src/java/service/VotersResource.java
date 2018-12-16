@@ -100,7 +100,7 @@ public class VotersResource {
     public Response getAcara(
             @QueryParam("jenisAcara") String jenisAcara){
         VotersHelper helper = new VotersHelper();
-        Voters voters = helper.getAcara(jenisAcara);
+        List<Voters> voters = helper.getAcara(jenisAcara);
         Gson gson = new Gson();
         return Response
                 .status(200)

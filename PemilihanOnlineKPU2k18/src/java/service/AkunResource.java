@@ -95,4 +95,17 @@ public class AkunResource {
                 .entity(akun)
                 .build();
     }
+     @GET
+    @Path("getDataUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDataUser(
+            @QueryParam("email") String email){
+        AkunHelper helper = new AkunHelper();
+        List<Akun> akun = helper.getDataUser(email);
+        Gson gson = new Gson();
+        return Response
+                .status(200)
+                .entity(gson.toJson(akun))
+                .build();
+    }
 }

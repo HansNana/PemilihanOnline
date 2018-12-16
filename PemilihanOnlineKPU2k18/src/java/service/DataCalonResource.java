@@ -101,7 +101,7 @@ public class DataCalonResource {
     public Response getAcara(
             @QueryParam("jenisAcara") String jenisAcara) {
         DataCalonHelper helper = new DataCalonHelper();
-        DataCalon dataCalon = helper.getAcara(jenisAcara);
+        List<DataCalon> dataCalon = helper.getAcara(jenisAcara);
         Gson gson = new Gson();
         return Response
                 .status(200)

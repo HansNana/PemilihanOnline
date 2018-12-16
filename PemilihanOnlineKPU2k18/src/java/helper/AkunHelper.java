@@ -18,10 +18,12 @@ import util.HibernateUtil;
  * @author danielbram
  */
 public class AkunHelper {
-    public AkunHelper(){
-        
+
+    public AkunHelper() {
+
     }
-    public List<Akun> getAllAkun(){
+
+    public List<Akun> getAllAkun() {
         List<Akun> result = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         String query = "from Akun a";
@@ -30,7 +32,8 @@ public class AkunHelper {
         session.close();
         return result;
     }
-     public void addNewAkun(int nik, String nama, String email, String password){
+
+    public void addNewAkun(int nik, String nama, String email, String password) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Akun akun = new Akun(nik, nama, email, password);
@@ -38,12 +41,12 @@ public class AkunHelper {
         transaction.commit();
         session.close();
     }
-     
-     public Akun getUser(String email, String password) {
+
+    public Akun getUser(String email, String password) {
         List<Akun> list = this.getAllAkun();
         Collections.sort(list);
         Akun akun = new Akun(email, password);
-        int result = Collections.binarySearch(list, akun);         
+        int result = Collections.binarySearch(list, akun);
         if (result <= -1) {
             //cek user
             return null;
@@ -56,4 +59,21 @@ public class AkunHelper {
             }
         }
     }
+
+    public List<Akun> getDataUser(String email) {
+        List<Akun> list = this.getAllAkun();
+        List<Akun> ketemu = this.getAllAkun();
+        ketemu.clear();
+        
+        Akun akun = new Akun(email);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getEmail().equals(akun.getEmail())) {
+                ketemu.add(list.get(i));
+            }
+
+        }
+
+        return ketemu;
+    }
+
 }
