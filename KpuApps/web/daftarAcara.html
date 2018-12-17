@@ -79,10 +79,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-nav">
-                        <li><a class="active" href="#home">Home</a></li>
-                        <li><a class="active" href="HalamanAdmin.html">Daftar Acara</a></li>
-                        <li><a class="active" href="#daftarCalon">Daftar Calon</a></li>
-                        <li><a class="active" href="Logout.html">Logout</a></li>
+                        <li><a class="active" href="HalamanAdmin.html">Home</a></li>
+                        <li><a class="active" href="daftarAcara.html">Daftar Acara</a></li>
+                        <li><a class="active" href="daftarCalon.html">Daftar Calon</a></li>
+                        <li><a class="active" href="Login.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
                 </div>
@@ -149,7 +149,7 @@
         <script src="js/script.js"></script>
         <script>
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
+            var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/acara';
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -177,7 +177,7 @@
                 document.getElementById("output").innerHTML = out;
             }
             function Delete(jenisAcara) {
-                var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara/deleteAcara?jenisAcara=" + jenisAcara;
+                var url = "http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/acara/deleteAcara?jenisAcara=" + jenisAcara;
                 
 
                 var xhttp = new XMLHttpRequest();

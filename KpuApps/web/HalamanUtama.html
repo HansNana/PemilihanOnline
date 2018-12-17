@@ -65,7 +65,7 @@
                         <li><a class="active" href="#home">Home</a></li>
                         <li><a class="active" href="#daftarPeserta">Daftar Peserta</a></li>
                         <li><a class="active" href="PilihCalonPemimpin.html">Voting</a></li>
-                        <li><a class="active" href="Logout.html">Logout</a></li>
+                        <li><a class="active" href="Login.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
                 </div>
@@ -91,47 +91,11 @@
             <div class="container">
                 <div class="row text-center title">
                     <h2>Daftar Peserta</h2>
-                    <h4 class="light muted">Ayo daftarkan dirimu untuk pemilihan.</h4>
-                    
+                    <h4 class="light muted">Ayo daftarkan dirimu untuk pemilihan.</h4>                   
                 </div>
+                
                 <div id="output">     
                   
-
-                    <!--                        <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/akun.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Daftar Pasien</h4>
-                                                <p class="description">Daftar Pasien merupakan halaman untuk mendaftarkan Pasien baru.
-                                                    <br>
-                                                    <a href="formDaftar.html" class="btn btn-blue-fill">Daftar Pasien</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/klinik.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Daftar Klinik</h4>
-                                                <p class="description">Daftar Klinik merupakan halaman untuk mendaftarkan klinik yang ada di Yogyakarta.
-                                                    <br>
-                                                    <a href="formKlinik.html" class="btn btn-blue-fill">Daftar Klinik</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/absen.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Form Antrian Klinik</h4>
-                                                <p class="description">Antrian Klinik merupakan sebuah Form untuk pengambilan nomor antrian Pasien.
-                                                    <br>
-                                                    <a href="formAntrianKlinik.html" class="btn btn-blue-fill">Antrian Klinik</a>
-                                                </p>
-                                            </div>
-                                        </div>-->
                 </div>
             </div>
             <div class="cut cut-bottom"></div>
@@ -170,7 +134,7 @@
         <script>
             var pesertaAcara = getCookie("email");
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
+            var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/acara';
             
 
             xmlhttp.onreadystatechange = function () {
@@ -220,9 +184,8 @@
             }
              function loadDoc(pesertaAcara) {
 
-
                 var xmlhttp = new XMLHttpRequest();
-                var urlPeserta = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + pesertaAcara;
+                var urlPeserta = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + pesertaAcara;
 
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -241,12 +204,11 @@
                 };
                 var html = JSON.stringify(json, 0, 100);
 //
-                var Url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/pesertaAcara/addPesertaAcara";
+                var Url = "http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/pesertaAcara/addPesertaAcara";
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', Url, false);
                 xhr.setRequestHeader("Content-type", "application/json");
                 xhr.send(html);
-
 
                 return false;
             }

@@ -62,10 +62,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-nav">
-                        <li><a class="active" href="#home">Home</a></li>
-                        <li><a class="active" href="HalamanAdmin.html">Daftar Acara</a></li>
-                        <li><a class="active" href="#daftarCalon">Daftar Calon</a></li>
-                        <li><a class="active" href="Logout.html">Logout</a></li>
+                        <li><a class="active" href="HalamanAdmin.html">Home</a></li>
+                        <li><a class="active" href="daftarAcara.html">Daftar Acara</a></li>
+                        <li><a class="active" href="daftarCalon.html">Daftar Calon</a></li>
+                        <li><a class="active" href="Login.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
                 </div>
@@ -130,7 +130,7 @@
                                     <option></option>
                                     <option label="Pemilihan Presiden">PemilihanPresiden</option>
                                     <option label="Pemilihan Gubernur">PemilihanGubernur</option>
-                                    <option label="Pemilihan Rw">PemilihanRw</option>                                   
+                                    <option label="Pemilihan Rw">PemilihanRW</option>                                   
                                 </select>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                         };
 
                         var html = JSON.stringify(json, 0, 100);
-                        var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/addDataCalon";
+                        var url = "http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/dataCalon/addDataCalon";
 
                         var xhr = new XMLHttpRequest();
                         xhr.open("POST", url, false);
@@ -229,34 +229,5 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
-<!--        <script>
-            var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
-
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    myFunction(this.responseText);
-                }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-            function myFunction(response) {
-                var arr = JSON.parse(response);
-                var i;
-                var out;
-                for (i = 0; i < arr.length; i++) {
-                    out += "<div class=\"col-md-4\">" +
-                            "<div class=\"service\">" +
-                            "<h4 class=\"heading\">" + arr[i].jenisAcara + "</h4>" +
-                            "<br>" +
-                            "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
-                            "</p>" +
-                            "</div>" +
-                            "</div>"
-                }
-
-                document.getElementById("output").innerHTML = out;
-            }
-        </script>-->
     </body>
 </html>

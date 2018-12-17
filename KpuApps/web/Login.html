@@ -110,43 +110,34 @@
             </div>   
         </section> 
         <script>
-
-
             function loadDoc() {
                 var email = mail.value;
                 var password = pass.value;
 
-
-                var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/akun/login?email=' + email + '&password=' + password;
+                var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/login?email=' + email + '&password=' + password;
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState === 4 && this.status === 200) {
                         var akun = JSON.parse(this.responseText);
                         if (akun !== null) {
-                            if (akun.email === "admin" && akun.password === 1234) {
-                                window.open("HalamanAdmin.html")
+                            if (akun.email === "admin" && akun.password === "1234") {
+                                window.open("HalamanAdmin.html");
                             } else  {
                                 alert("Selamat Datang " + email);
                                 window.open("HalamanUtama.html", "_self");
-                                document.cookie = "email=" + akun.email
+                                document.cookie = "email=" + akun.email;
                             }
-
                         } else {
                             alert("Login Gagal!");
                         }
-
-
                     }
                 };
                 xhttp.open("GET", url, true);
                 xhttp.send();
-            }
-            
-
-            
-
+            }            
         </script>
+        
         <footer id="contactUs">
             <div class="container">    
                 <div class="row">
@@ -176,6 +167,5 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
-
     </body>
 </html>

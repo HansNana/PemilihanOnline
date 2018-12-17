@@ -62,10 +62,10 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-nav">
-                        <li><a class="active" href="#home">Home</a></li>
+                        <li><a class="active" href="HalamanUtama.html">Home</a></li>
                         <li><a class="active" href="HalamanUtama.html">Daftar Peserta</a></li>
                         <li><a class="active" href="#voting">Voting</a></li>
-                        <li><a class="active" href="Logout.html">Logout</a></li>
+                        <li><a class="active" href="Login.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
                 </div>
@@ -132,7 +132,7 @@
             var USER = getCookie("email");
             var jenisAcara = getCookie("jenisAcara");
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/getAcara?jenisAcara=' + jenisAcara;
+            var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/dataCalon/getAcara?jenisAcara=' + jenisAcara;
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -162,7 +162,7 @@
             }
             function loadDoc(noUrut) {
                 var xmlhttp = new XMLHttpRequest();
-                var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + USER;
+                var url = 'http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + USER;
 
                 xmlhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -183,7 +183,7 @@
 
                 };
                 var html = JSON.stringify(json, 0, 100);
-                var Url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/voters/addVoters";
+                var Url = "http://202.94.83.190:8080/PemilihanOnlineKPU2k18/webresources/voters/addVoters";
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', Url, false);
                 xhr.setRequestHeader("Content-type", "application/json");
