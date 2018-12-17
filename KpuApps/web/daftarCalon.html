@@ -82,7 +82,7 @@
                         <li><a class="active" href="#home">Home</a></li>
                         <li><a class="active" href="HalamanAdmin.html">Daftar Acara</a></li>
                         <li><a class="active" href="#daftarCalon">Daftar Calon</a></li>
-                        <li><a class="active" href="Logout.html">Logout</a></li>
+                        <li><a class="active" href="Login.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
                 </div>
@@ -108,13 +108,15 @@
             <div class="container">
                 <div class="row text-center title">
                     <h2>Daftar Calon</h2>
-                    <h4 class="light muted">Daftar Calon.</h4>
+                    <a class="active" href="formAddCalon.html">Tambah Calon</a>
+                    <button id="tambah" onclick="tambah()">Tambah Calon</button>
+                    <p id="form">
                 </div>
 
                 <p id="output" ></p>
 
             </div>
-            
+
             <div class="cut cut-bottom"></div>
         </section>
         <footer id="contactUs">
@@ -146,9 +148,10 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
+        <script src="js/script.js"></script>
         <script>
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
+            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon';
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -166,13 +169,11 @@
                     out += "<tr><td>" +
                             arr[i].nikCalon +
                             "</td><td>" +
-                            arr[i].nama +
+                            arr[i].namaCalon +
                             "</td><td>" +
                             arr[i].noUrut +
                             "</td><td>" +
                             arr[i].jenisAcara +
-                            "</td><td>" +
-                            "<button type=\"button\" onclick=\"Edit(" + arr[i].nik + ")\">Edit</button>" +
                             "</td><td>" +
                             "<button type=\"button\" onclick=\"Delete(" + arr[i].nik + ")\">Delete</button>" +
                             "</td></tr>";
@@ -181,24 +182,40 @@
 
                 document.getElementById("output").innerHTML = out;
             }
-            function Edit() {
-
-            }
             function Delete(nik) {
                 var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/deleteDataCalon?nik=" + nik;
+                alert("Delete Berhasil");
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                       alert("Delete Berhasil");
-                       
-
+                        alert("Delete Berhasil");
 
                     }
                 };
+                window.open("daftarCalon.html","_self");
                 xhttp.open("GET", url, true);
                 xhttp.send();
             }
             
+            function make_json(form) {
+                var json = {
+                    "nikCalon": form.nikCalon.value,
+                    "namaCalon": form.nama.value,
+                    "nomerUrut": form.noUrut.value,
+                    "foto": form.foto.value,
+                    "jenisAcara": form.jenisAcara.value
+                };
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/addDataCalon";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("output").innerHTML = html;
+                return false;
+            }
+            ;
         </script>
     </body>
 </html>

@@ -127,10 +127,12 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
+        <script src="js/script.js"></script>
         <script>
-            var jenisAcara = getCookie("jenisAcara")
+            var USER = getCookie("email");
+            var jenisAcara = getCookie("jenisAcara");
             var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/getAcara?jenisAcara='+jenisAcara;
+            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/getAcara?jenisAcara=' + jenisAcara;
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -150,7 +152,7 @@
                             "<br>" +
                             "<br>" +
                             "<br>" +
-                            "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
+                            "<button onclick=\"loadDoc(" + arr[i].noUrut + ")\" class=\"btn btn-blue-fill\">Vote</button>" +
                             "</p>" +
                             "</div>" +
                             "</div>";
@@ -158,6 +160,40 @@
 
                 document.getElementById("output").innerHTML = out;
             }
+            function loadDoc(noUrut) {
+                var xmlhttp = new XMLHttpRequest();
+                var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + USER;
+
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        vote(this.responseText,noUrut);
+                    }
+                }
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+            function vote(response,noUrut) {
+                var arr = JSON.parse(response);
+
+                var json = {
+                    "nik": arr.nik,
+                    "nama": arr.nama,
+                    "noUrut": noUrut,
+                    "jenisAcara": getCookie("jenisAcara")
+
+                };
+                var html = JSON.stringify(json, 0, 100);
+                var Url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/voters/addVoters";
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', Url, false);
+                xhr.setRequestHeader("Content-type", "application/json");
+                xhr.send(html);
+
+                document.getElementById("output").innerHTML = html;
+                return false;
+            }
+            ;
+
             function getCookie(cname) {
                 var name = cname + "=";
                 var ca = document.cookie.split(';');

@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Komisi Pemilihan Umum</title>
+        <title>KPU | Tambah Calon</title>
         <meta name="description" content="Komisi Pemilihan Umum merupakan lembaga yang menyelenggarakan pemilihan umum di Indonesia." />
         <meta name="keywords" content="komisi pemilihan umum, kpu, pemilihan online, pemilihan" />
         <meta name="author" content="Ketut Muliana (165314065) & Bram Chandra Saputra (165314078)" />
@@ -43,7 +43,7 @@
         <script src="js/main.js"></script>
     </head>
 
-    <body onload="checkCookieBeforeLoggedIn()">
+    <body>
         <div class="preloader">
             <img src="img/loader.gif" alt="Preloader image">
         </div>
@@ -63,8 +63,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-nav">
                         <li><a class="active" href="#home">Home</a></li>
-                        <li><a class="active" href="#daftarPeserta">Daftar Peserta</a></li>
-                        <li><a class="active" href="PilihCalonPemimpin.html">Voting</a></li>
+                        <li><a class="active" href="HalamanAdmin.html">Daftar Acara</a></li>
+                        <li><a class="active" href="#daftarCalon">Daftar Calon</a></li>
                         <li><a class="active" href="Logout.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
@@ -87,55 +87,118 @@
                 </div>
             </div>
         </header>
-        <section id="daftarPeserta" class="section section-padded">
+        <section id="daftarCalon" class="section section-padded">
             <div class="container">
-                <div class="row text-center title">
-                    <h2>Daftar Peserta</h2>
-                    <h4 class="light muted">Ayo daftarkan dirimu untuk pemilihan.</h4>
-                    
-                </div>
-                <div id="output">     
-                  
+                <div class="popup-form" style="background: #33ffcc">
+                    <center><h3>Form Tambah Calon</h3></center><br> 
+                    <hr class="my-5">
+                    <form class="form-horizontal" action="" id="registerForm" onsubmit="return make_json(this)" method="POST">
+                        <div class="form-group" method="get">
+                            <label class="control-label col-xs-3" for="inputFoto">Pilih Foto:</label>
+                            <div class="col-xs-6">
+                                <!--<input type="text" class="form-control" id="nikCalon" placeholder="Masukkan NIK Calon">-->
+                                <!--'preview' di bawah ini adalah id element img-->
+                                <input type="file" id="foto" accept="image/*"  onchange="tampilkanPreview(this, 'preview')" />
+                                <!--<input type="submit" value="Upload" /><br/>-->
+                                <!--element image untuk menampilkan preview-->
+                                <img id="preview" src="" alt="" width="320px"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputNikCalon">NIK:</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="nikCalon" placeholder="Masukkan NIK Calon">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputNamaCalon">Nama:</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="namaCalon" placeholder="Masukkan Nama Calon">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputNoUrut">Nomor Urut:</label>
+                            <div class="col-xs-6">
+                                <input type="number" class="form-control" id="noUrut" placeholder="Masukkan Nomor Urut">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputPilihAcara">Pilih Acara:</label>
+                            <div class="col-xs-6">
+                                <!--<input type="" class="form-control" id="noUrut" placeholder="Masukkan Nomor Urut">-->
+                                <select class="form-control" id="jenisAcara">
+                                    <option></option>
+                                    <option label="Pemilihan Presiden">PemilihanPresiden</option>
+                                    <option label="Pemilihan Gubernur">PemilihanGubernur</option>
+                                    <option label="Pemilihan Rw">PemilihanRw</option>                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-6">
+                                <input type="submit" class="btn btn-blue-fill" value="Submit">
+                                <input type="reset" class="btn btn-blue-fill" value="Reset">
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                </div>	
+                <script src="js/script.js"></script>
+                <p id="output"></p>
+                <script>
+                    function make_json(form) {
+                        var json = {
+                            "nikCalon": form.nikCalon.value,
+                            "namaCalon": form.namaCalon.value,
+                            "noUrut": form.noUrut.value,
+                            "foto": form.foto.value,
+                            "jenisAcara": form.jenisAcara.value
+                        };
 
-                    <!--                        <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/akun.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Daftar Pasien</h4>
-                                                <p class="description">Daftar Pasien merupakan halaman untuk mendaftarkan Pasien baru.
-                                                    <br>
-                                                    <a href="formDaftar.html" class="btn btn-blue-fill">Daftar Pasien</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/klinik.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Daftar Klinik</h4>
-                                                <p class="description">Daftar Klinik merupakan halaman untuk mendaftarkan klinik yang ada di Yogyakarta.
-                                                    <br>
-                                                    <a href="formKlinik.html" class="btn btn-blue-fill">Daftar Klinik</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service">
-                                                <div class="icon-holder">
-                                                    <img src="img/icons/absen.png" alt="" class="icon">
-                                                </div>
-                                                <h4 class="heading">Form Antrian Klinik</h4>
-                                                <p class="description">Antrian Klinik merupakan sebuah Form untuk pengambilan nomor antrian Pasien.
-                                                    <br>
-                                                    <a href="formAntrianKlinik.html" class="btn btn-blue-fill">Antrian Klinik</a>
-                                                </p>
-                                            </div>
-                                        </div>-->
-                </div>
+                        var html = JSON.stringify(json, 0, 100);
+                        var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/addDataCalon";
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, false);
+                        xhr.setRequestHeader("Content-type", "application/json");
+                        xhr.send(html);
+                        document.getElementById("output").innerHTML = this.responseText;
+                        return false;
+                    }
+
+                    function tampilkanPreview(gambar, idpreview) {
+//                      membuat objek gambar
+                        var gb = gambar.files;
+
+//                      loop untuk merender gambar
+                        for (var i = 0; i < gb.length; i++) {
+//                          bikin variabel
+                            var gbPreview = gb[i];
+                            var imageType = /image.*/;
+                            var preview = document.getElementById(idpreview);
+                            var reader = new FileReader();
+
+                            if (gbPreview.type.match(imageType)) {
+//                              jika tipe data sesuai
+                                preview.file = gbPreview;
+                                reader.onload = (function (element) {
+                                    return function (e) {
+                                        element.src = e.target.result;
+                                    };
+                                })(preview);
+
+                                //membaca data URL gambar
+                                reader.readAsDataURL(gbPreview);
+                            } else {
+//                              jika tipe data tidak sesuai
+                                alert("Type file tidak sesuai. Khusus image.");
+                            }
+
+                        }
+                    }
+                </script>
             </div>
             <div class="cut cut-bottom"></div>
-            
         </section>
         <footer id="contactUs">
             <div class="container">    
@@ -166,12 +229,9 @@
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
-        <script src="js/script.js"></script>
-        <script>
-            var pesertaAcara = getCookie("email");
+<!--        <script>
             var xmlhttp = new XMLHttpRequest();
             var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
-            
 
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -185,71 +245,18 @@
                 var i;
                 var out;
                 for (i = 0; i < arr.length; i++) {
-                    out += 
+                    out += "<div class=\"col-md-4\">" +
                             "<div class=\"service\">" +
-                            "<h4>" + arr[i].jenisAcara + "</h4>" +
+                            "<h4 class=\"heading\">" + arr[i].jenisAcara + "</h4>" +
                             "<br>" +
-                            "<br>" +
-                            "<br>" +
-                            "<button type=\"button\" onclick=\"Acara('" + arr[i].jenisAcara + "')\" class=\"btn btn-blue-fill\">Mulai Vote</button>" +
+                            "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
                             "</p>" +
-                            
+                            "</div>" +
                             "</div>"
                 }
 
                 document.getElementById("output").innerHTML = out;
             }
-           
-            function Acara(jenisAcara) {
-                document.cookie = "jenisAcara=" + jenisAcara;
-                window.open("PilihCalonPemimpin.html");
-            }
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-             function loadDoc(pesertaAcara) {
-
-
-                var xmlhttp = new XMLHttpRequest();
-                var urlPeserta = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/akun/getDataUser?email=' + pesertaAcara;
-
-                xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        addPeserta(this.responseText);
-                    }
-                }
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
-            }
-            function addPeserta(response) {
-                var arr = JSON.parse(response);
-                var json = {
-                    "nik": arr.nik,
-                    "nama": arr.nama,
-                    "jenisAcara": getCookie("jenisAcara")
-                };
-                var html = JSON.stringify(json, 0, 100);
-//
-                var Url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/pesertaAcara/addPesertaAcara";
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', Url, false);
-                xhr.setRequestHeader("Content-type", "application/json");
-                xhr.send(html);
-
-
-                return false;
-            }
-        </script>
+        </script>-->
     </body>
 </html>

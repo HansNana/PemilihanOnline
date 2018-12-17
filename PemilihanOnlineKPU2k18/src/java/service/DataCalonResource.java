@@ -86,9 +86,9 @@ public class DataCalonResource {
     @Path("deleteDataCalon")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteDataCalon(
-            @QueryParam("nik") int nik) {
-        DataCalonHelper helper = new DataCalonHelper();
-        int data = helper.deleteDataCalon(nik);
+            @QueryParam("nik") String nik) {
+        DataCalonHelper helper = new DataCalonHelper();        
+        int data = helper.deleteDataCalon(Integer.parseInt(nik));
         return Response
                 .status(200)
                 .entity(data)

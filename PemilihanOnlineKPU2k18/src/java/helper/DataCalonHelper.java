@@ -38,7 +38,7 @@ public class DataCalonHelper {
     public int deleteDataCalon(int delete) {
         int result;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String query = "delete DataCalon where nikCalon = '" + delete + "'";
+        String query = "delete DataCalon where nikCalon= " + delete;
         Query q = session.createQuery(query);
         result = q.executeUpdate();
         session.close();

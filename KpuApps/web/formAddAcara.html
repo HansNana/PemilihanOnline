@@ -2,27 +2,10 @@
 <html lang="en" id="home">
 
     <head> 
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
-
-            td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }
-        </style>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>KPU | Daftar Calon</title>
+        <title>KPU | Tambah Acara</title>
         <meta name="description" content="Komisi Pemilihan Umum merupakan lembaga yang menyelenggarakan pemilihan umum di Indonesia." />
         <meta name="keywords" content="komisi pemilihan umum, kpu, pemilihan online, pemilihan" />
         <meta name="author" content="Ketut Muliana (165314065) & Bram Chandra Saputra (165314078)" />
@@ -80,8 +63,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-nav">
                         <li><a class="active" href="#home">Home</a></li>
-                        <li><a class="active" href="HalamanAdmin.html">Daftar Acara</a></li>
-                        <li><a class="active" href="#daftarCalon">Daftar Calon</a></li>
+                        <li><a class="active" href="#daftarAcara">Daftar Acara</a></li>
+                        <li><a class="active" href="daftarCalon.html">Daftar Calon</a></li>
                         <li><a class="active" href="Logout.html">Logout</a></li>
                         <li><a class="active" href="#contactUs">Contact Us</a></li>                      
                     </ul>
@@ -104,17 +87,47 @@
                 </div>
             </div>
         </header>
-        <section id="daftarCalon" class="section section-padded">
+        <section id="daftarAcara" class="section section-padded">
             <div class="container">
-                <div class="row text-center title">
-                    <h2>Daftar Acara</h2>
-                    <a class="active" href="formAddAcara.html">Tambah Acara</a>
-                </div>
+                <div class="popup-form" style="background: #33ffcc">
+                    <center><h3>Form Tambah Acara</h3></center><br> 
+                    <hr class="my-5">
+                    <form class="form-horizontal" action="" id="registerForm" onsubmit="return make_json(this)" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputNamaAcara">Nama Acara:</label>
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control" id="namaAcara" placeholder="Masukkan Nama Acara">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-6">
+                                <input type="submit" class="btn btn-blue-fill" value="Submit">
+                                <input type="reset" class="btn btn-blue-fill" value="Reset">
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                </div>	
+                <p id="output"></p>
+                <script src="js/script.js"></script>
+                <script>
+                    function make_json(form) {
+                        var json = {
+                            "jenisAcara": form.namaAcara.value
+                        };
 
-                <p id="output" ></p>
+                        var html = JSON.stringify(json, 0, 100);
+                        var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara/addAcara";
 
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", url, false);
+                        xhr.setRequestHeader("Content-type", "application/json");
+                        xhr.send(html);
+                        document.getElementById("output").innerHTML = this.responseText;
+                        return false;
+                    }
+                </script>
             </div>
-
             <div class="cut cut-bottom"></div>
         </section>
         <footer id="contactUs">
@@ -145,53 +158,6 @@
             <ul>
             </ul>
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
-        </div>
-        <script src="js/script.js"></script>
-        <script>
-            var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
-
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    myFunction(this.responseText);
-                }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-            function myFunction(response) {
-                var arr = JSON.parse(response);
-                var i;
-                var out = "<table><tr><th>Jenis Acara</th><th></th></tr>";
-
-                for (i = 0; i < arr.length; i++) {
-                    out += "<tr><td>" +
-                            arr[i].jenisAcara +
-                            "</td><td>" +
-                            "<button type=\"button\" onclick=\"Delete('" + arr[i].jenisAcara + "')\">Delete</button>" +
-                            "</td></tr>"
-
-                            ;
-                }
-                out += "</table>";
-
-                document.getElementById("output").innerHTML = out;
-            }
-            function Delete(jenisAcara) {
-                var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara/deleteAcara?jenisAcara=" + jenisAcara;
-                
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        alert("Delete Berhasil");
-
-                    }
-                };
-                
-                xhttp.open("GET", url, true);
-                xhttp.send();
-                window.open("daftarAcara.html", "_self");
-            }
-        </script>
+        </div>     
     </body>
 </html>
