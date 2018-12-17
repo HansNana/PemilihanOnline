@@ -154,34 +154,14 @@
             <a href="#" class="close-link"><i class="arrow_up"></i></a>
         </div>
         <script>
-            var xmlhttp = new XMLHttpRequest();
-            var url = 'http://localhost:8084/PemilihanOnlineKPU2k18/webresources/acara';
-
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    myFunction(this.responseText);
-                }
-            }
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-            function myFunction(response) {
-                var arr = JSON.parse(response);
-                var i;
-                var out;
-                for (i = 0; i < arr.length; i++) {
-                    out += "<div class=\"col-md-4\">" +
-                            "<div class=\"service\">" +
-                            "<h4 class=\"heading\">" + arr[i].jenisAcara + "</h4>" +
-                            "<br>" +
-                            "<a href=\"formDaftar.html\" class=\"btn btn-blue-fill\">Vote</a>" +
-                            "</p>" +
-                            "</div>" +
-                            "</div>"
-                }
-
-                document.getElementById("output").innerHTML = out;
-            }
-           
+            
+           function openList(daftar){
+               if(daftar==='DaftarCalon'){
+                   window.open("daftarCalon.html");
+               } else {
+                   window.open();
+               }
+           }
         </script>
     </body>
 </html>

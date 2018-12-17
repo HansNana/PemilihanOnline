@@ -2,7 +2,7 @@
 <html lang="en" id="home">
 
     <head> 
-        <style>
+         <style>
             table {
                 font-family: arial, sans-serif;
                 border-collapse: collapse;
@@ -107,14 +107,14 @@
         <section id="daftarCalon" class="section section-padded">
             <div class="container">
                 <div class="row text-center title">
-                    <h2>Daftar Calon</h2>
+                    <h2>Daftar Acara</h2>
                     <h4 class="light muted">Daftar Calon.</h4>
                 </div>
 
                 <p id="output" ></p>
 
             </div>
-            
+
             <div class="cut cut-bottom"></div>
         </section>
         <footer id="contactUs">
@@ -160,45 +160,24 @@
             function myFunction(response) {
                 var arr = JSON.parse(response);
                 var i;
-                var out = "<table><tr><th>NIK Calon</th><th>Nama</th><th>Nomer Urut</th>Foto<th>Jenis Acara</th></tr>";
+                var out = "<table><tr><th>Jenis Acara</th><th></th><th></th></tr>";
 
                 for (i = 0; i < arr.length; i++) {
                     out += "<tr><td>" +
-                            arr[i].nikCalon +
-                            "</td><td>" +
-                            arr[i].nama +
-                            "</td><td>" +
-                            arr[i].noUrut +
-                            "</td><td>" +
                             arr[i].jenisAcara +
                             "</td><td>" +
-                            "<button type=\"button\" onclick=\"Edit(" + arr[i].nik + ")\">Edit</button>" +
+                            "<button type=\"button\" onclick=\"Edit(" + arr[i].jenisAcara + ")\">Edit</button>" +
                             "</td><td>" +
-                            "<button type=\"button\" onclick=\"Delete(" + arr[i].nik + ")\">Delete</button>" +
-                            "</td></tr>";
+                            "<button type=\"button\" onclick=\"Delete(" + arr[i].jenisAcara + ")\">Delete</button>" +
+                            "</td></tr>"
+
+
+                            ;
                 }
                 out += "</table>";
 
                 document.getElementById("output").innerHTML = out;
             }
-            function Edit() {
-
-            }
-            function Delete(nik) {
-                var url = "http://localhost:8084/PemilihanOnlineKPU2k18/webresources/dataCalon/deleteDataCalon?nik=" + nik;
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                       alert("Delete Berhasil");
-                       
-
-
-                    }
-                };
-                xhttp.open("GET", url, true);
-                xhttp.send();
-            }
-            
         </script>
     </body>
 </html>
